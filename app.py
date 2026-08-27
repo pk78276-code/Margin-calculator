@@ -39,6 +39,12 @@ html, body, [class*="css"] {font-family:'Manrope',sans-serif;letter-spacing:.005
 [data-testid="stSidebar"] [data-testid="stNumberInput"] button {background:#e5e7eb !important;color:#0f172a !important;border-color:#cbd5e1;}
 [data-testid="stSidebar"] [data-testid="stNumberInput"] button svg {fill:#0f172a !important;}
 [data-testid="stSidebar"] [data-testid="stExpander"] label,[data-testid="stSidebar"] [data-testid="stExpander"] [data-testid="stMarkdownContainer"] p {color:#f8fafc !important;}
+[data-testid="stSidebar"] [data-testid="stFileUploader"] label,
+[data-testid="stSidebar"] [data-testid="stFileUploader"] label *,
+[data-testid="stSidebar"] [data-testid="stFileUploader"] section,
+[data-testid="stSidebar"] [data-testid="stFileUploader"] small {color:#f8fafc !important;-webkit-text-fill-color:#f8fafc !important;}
+[data-testid="stSidebar"] [data-testid="stFileUploader"] section {background:#242424;border:1px solid #555;border-radius:4px;}
+[data-testid="stSidebar"] [data-testid="stFileUploader"] button {background:#e50914;color:#fff;border-color:#e50914;}
 [data-testid="stSidebar"] .stMarkdown h2,[data-testid="stSidebar"] .stMarkdown h3 {font-family:'Space Grotesk',sans-serif;letter-spacing:-.02em;}
 .hero {background:linear-gradient(120deg,#081533 0%,#123b8f 58%,#2563eb 100%);border:1px solid rgba(147,197,253,.35);border-radius:24px;padding:30px 34px;color:white;box-shadow:0 22px 0 rgba(15,23,42,.08),0 28px 55px rgba(30,64,175,.28);margin-bottom:22px;position:relative;overflow:hidden;transform:translateY(-2px);}
 .hero:before {content:"";position:absolute;width:360px;height:360px;border:1px solid rgba(255,255,255,.18);border-radius:50%;right:-90px;top:-180px;box-shadow:0 0 0 28px rgba(255,255,255,.04),0 0 0 56px rgba(255,255,255,.03);}
