@@ -31,7 +31,7 @@ html, body, [class*="css"] {font-family: 'Inter', sans-serif;}
 .hero:after{content:"";position:absolute;width:260px;height:260px;border-radius:50%;right:-80px;top:-120px;background:rgba(255,255,255,.08)}
 .hero h1{font-size:30px;line-height:1.2;margin:0 0 7px;font-weight:800}.hero p{margin:0;color:#dbeafe;font-size:14px}.eyebrow{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#93c5fd;margin-bottom:9px}
 .kpi {background:rgba(255,255,255,.94);border:1px solid #e5e7eb;border-radius:17px;padding:17px 18px;box-shadow:0 7px 22px rgba(15,23,42,.06);min-height:126px}
-.kpi-label{font-size:12px;color:#64748b;font-weight:650;margin-bottom:7px}.kpi-value{font-size:25px;font-weight:800;color:#0f172a;letter-spacing:-.02em}.kpi-foot{font-size:11px;color:#64748b;margin-top:8px}.good{color:#059669;font-weight:700}.warn{color:#d97706;font-weight:700}.bad{color:#dc2626;font-weight:700}
+.kpi-label{font-size:12px;color:#64748b;font-weight:650;margin-bottom:7px}.kpi-label.landing{color:#2563eb}.kpi-label.cost{color:#d97706}.kpi-value{font-size:25px;font-weight:800;color:#0f172a;letter-spacing:-.02em}.kpi-foot{font-size:11px;color:#64748b;margin-top:8px}.good{color:#059669;font-weight:700}.warn{color:#d97706;font-weight:700}.bad{color:#dc2626;font-weight:700}
 .section-title{font-size:18px;font-weight:800;color:#0f172a;margin-top:4px;margin-bottom:2px}.section-sub{font-size:12px;color:#64748b;margin-bottom:12px}
 .info-card{background:#fff;border:1px solid #e5e7eb;border-radius:16px;padding:14px 16px;box-shadow:0 5px 18px rgba(15,23,42,.04)}
 div[data-testid="stMetric"] {background:white;border:1px solid #e5e7eb;padding:12px 15px;border-radius:14px;box-shadow:0 4px 16px rgba(15,23,42,.04)}
@@ -149,9 +149,9 @@ def money(v):
 def pct(v): return f"{v*100:.1f}%"
 
 
-def kpi(label, value, foot, state=""):
+def kpi(label, value, foot, state="", label_class=""):
     cls = {"good":"good","warn":"warn","bad":"bad"}.get(state,"")
-    st.markdown(f'<div class="kpi"><div class="kpi-label">{label}</div><div class="kpi-value">{value}</div><div class="kpi-foot {cls}">{foot}</div></div>', unsafe_allow_html=True)
+    st.markdown(f'<div class="kpi"><div class="kpi-label {label_class}">{label}</div><div class="kpi-value">{value}</div><div class="kpi-foot {cls}">{foot}</div></div>', unsafe_allow_html=True)
 
 @st.cache_data(show_spinner=False)
 def load_default_bytes(path_str):
@@ -218,8 +218,8 @@ net_pct = net / landing if landing else 0
 below = int((f["Net Margin %"] < target).sum())
 
 cols = st.columns(6)
-with cols[0]: kpi("Landing Value · Excl GST", money(landing), f"{len(f):,} line items")
-with cols[1]: kpi("Product Cost", money(cost), f"{(cost/landing*100 if landing else 0):.1f}% of landing")
+with cols[0]: kpi("Landing Price Excl GST", money(landing), f"{len(f):,} line items", label_class="landing")
+with cols[1]: kpi("Cost Price", money(cost), f"{(cost/landing*100 if landing else 0):.1f}% of landing", label_class="cost")
 with cols[2]: kpi("Gross Margin", money(gross), f"{pct(gross_pct)} gross margin", "good" if gross_pct >= target else "warn")
 with cols[3]: kpi("Operating Cost", money(op), f"{(op/landing*100 if landing else 0):.1f}% of landing")
 with cols[4]: kpi("Net Margin", money(net), f"{pct(net_pct)} net margin", "good" if net_pct >= target else "bad")
