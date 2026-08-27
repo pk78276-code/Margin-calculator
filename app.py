@@ -20,23 +20,34 @@ DEFAULT_FILE = APP_DIR / "data" / "margin_model.xlsx"
 
 st.markdown("""
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
-html, body, [class*="css"] {font-family: 'Inter', sans-serif;}
-.stApp {background: radial-gradient(circle at 15% 0%, #eef4ff 0, #f8fafc 32%, #f8fafc 100%);}
-.block-container {padding-top: 1.4rem; padding-bottom: 2.5rem; max-width: 1500px;}
-[data-testid="stSidebar"] {background: linear-gradient(180deg,#0b1632 0%,#101c3e 55%,#16254b 100%);}
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap');
+:root {font-family:'Manrope',sans-serif;color:#172554;background:#eef4ff;}
+html, body, [class*="css"] {font-family:'Manrope',sans-serif;letter-spacing:.005em;}
+.stApp {background:radial-gradient(circle at 5% 0%,#dbeafe 0,#f8fafc 34%,#eef2ff 100%);color:#172554;}
+.block-container {padding-top:1.4rem;padding-bottom:2.5rem;max-width:1500px;}
+[data-testid="stSidebar"] {background:linear-gradient(160deg,#07122f 0%,#10265b 55%,#1d4ed8 100%);box-shadow:12px 0 35px rgba(15,23,42,.18);}
 [data-testid="stSidebar"] * {color:#f8fafc;}
-[data-testid="stSidebar"] .stMultiSelect span, [data-testid="stSidebar"] .stSelectbox span {color:#111827;}
-.hero {background:linear-gradient(110deg,#0f172a 0%,#1e3a8a 55%,#2563eb 100%);border-radius:22px;padding:26px 30px;color:white;box-shadow:0 18px 45px rgba(30,58,138,.19);margin-bottom:18px;position:relative;overflow:hidden}
-.hero:after{content:"";position:absolute;width:260px;height:260px;border-radius:50%;right:-80px;top:-120px;background:rgba(255,255,255,.08)}
-.hero h1{font-size:30px;line-height:1.2;margin:0 0 7px;font-weight:800}.hero p{margin:0;color:#dbeafe;font-size:14px}.eyebrow{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#93c5fd;margin-bottom:9px}
-.kpi {background:rgba(255,255,255,.94);border:1px solid #e5e7eb;border-radius:17px;padding:17px 18px;box-shadow:0 7px 22px rgba(15,23,42,.06);min-height:126px}
-.kpi-label{font-size:12px;color:#64748b;font-weight:650;margin-bottom:7px}.kpi-label.landing{color:#2563eb}.kpi-label.cost{color:#d97706}.kpi-value{font-size:25px;font-weight:800;color:#0f172a;letter-spacing:-.02em}.kpi-foot{font-size:11px;color:#64748b;margin-top:8px}.good{color:#059669;font-weight:700}.warn{color:#d97706;font-weight:700}.bad{color:#dc2626;font-weight:700}
-.section-title{font-size:18px;font-weight:800;color:#0f172a;margin-top:4px;margin-bottom:2px}.section-sub{font-size:12px;color:#64748b;margin-bottom:12px}
-.info-card{background:#fff;border:1px solid #e5e7eb;border-radius:16px;padding:14px 16px;box-shadow:0 5px 18px rgba(15,23,42,.04)}
-div[data-testid="stMetric"] {background:white;border:1px solid #e5e7eb;padding:12px 15px;border-radius:14px;box-shadow:0 4px 16px rgba(15,23,42,.04)}
-.stTabs [data-baseweb="tab-list"]{gap:8px;background:#eef2f7;padding:6px;border-radius:13px}.stTabs [data-baseweb="tab"]{height:40px;border-radius:9px;padding:0 16px}.stTabs [aria-selected="true"]{background:white;box-shadow:0 2px 8px rgba(15,23,42,.08)}
-[data-testid="stDataFrame"]{border:1px solid #e5e7eb;border-radius:14px;overflow:hidden}
+[data-testid="stSidebar"] .stMultiSelect span,[data-testid="stSidebar"] .stSelectbox span {color:#111827;}
+[data-testid="stSidebar"] .stMarkdown h2,[data-testid="stSidebar"] .stMarkdown h3 {font-family:'Space Grotesk',sans-serif;letter-spacing:-.02em;}
+.hero {background:linear-gradient(120deg,#081533 0%,#123b8f 58%,#2563eb 100%);border:1px solid rgba(147,197,253,.35);border-radius:24px;padding:30px 34px;color:white;box-shadow:0 22px 0 rgba(15,23,42,.08),0 28px 55px rgba(30,64,175,.28);margin-bottom:22px;position:relative;overflow:hidden;transform:translateY(-2px);}
+.hero:before {content:"";position:absolute;width:360px;height:360px;border:1px solid rgba(255,255,255,.18);border-radius:50%;right:-90px;top:-180px;box-shadow:0 0 0 28px rgba(255,255,255,.04),0 0 0 56px rgba(255,255,255,.03);}
+.hero:after {content:"";position:absolute;width:180px;height:180px;border-radius:50%;right:80px;bottom:-135px;background:rgba(125,211,252,.22);filter:blur(2px);}
+.hero h1 {font-family:'Space Grotesk',sans-serif;font-size:clamp(25px,3vw,36px);line-height:1.15;margin:0 0 9px;font-weight:700;letter-spacing:-.035em;position:relative;z-index:1;}
+.hero p {margin:0;max-width:930px;color:#dbeafe;font-size:14px;line-height:1.65;position:relative;z-index:1;}
+.eyebrow {font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:#7dd3fc;margin-bottom:10px;position:relative;z-index:1;}
+.kpi {background:linear-gradient(145deg,rgba(255,255,255,.98),rgba(239,246,255,.94));border:1px solid rgba(148,163,184,.28);border-radius:18px;padding:18px 19px;box-shadow:0 8px 0 rgba(148,163,184,.15),0 14px 28px rgba(15,23,42,.1);min-height:126px;transition:transform .2s ease,box-shadow .2s ease;}
+.kpi:hover {transform:translateY(-4px);box-shadow:0 12px 0 rgba(148,163,184,.14),0 22px 34px rgba(30,64,175,.15);}
+.kpi-label {font-size:12px;color:#475569;font-weight:800;margin-bottom:8px;line-height:1.35;}.kpi-label.landing{color:#2563eb}.kpi-label.cost{color:#d97706}.kpi-value{font-family:'Space Grotesk',sans-serif;font-size:clamp(20px,2vw,28px);font-weight:700;color:#0f172a;letter-spacing:-.035em;white-space:nowrap}.kpi-foot{font-size:11px;color:#64748b;margin-top:9px;line-height:1.4}.good{color:#059669;font-weight:800}.warn{color:#d97706;font-weight:800}.bad{color:#dc2626;font-weight:800}
+.section-title {font-family:'Space Grotesk',sans-serif;font-size:19px;font-weight:700;color:#172554;margin-top:6px;margin-bottom:3px;letter-spacing:-.02em;}.section-sub{font-size:12px;color:#64748b;margin-bottom:12px;line-height:1.5}
+.info-card {background:linear-gradient(145deg,#fff,#eff6ff);border:1px solid rgba(148,163,184,.3);border-radius:17px;padding:16px 18px;box-shadow:0 7px 0 rgba(148,163,184,.13),0 13px 25px rgba(15,23,42,.08);min-height:108px;}
+div[data-testid="stMetric"] {background:linear-gradient(145deg,#fff,#eff6ff);border:1px solid #dbeafe;padding:13px 16px;border-radius:15px;box-shadow:0 6px 0 rgba(148,163,184,.12),0 10px 20px rgba(15,23,42,.07);}
+.stTabs [data-baseweb="tab-list"] {gap:7px;background:rgba(226,232,240,.82);padding:7px;border-radius:15px;box-shadow:inset 0 2px 5px rgba(15,23,42,.08);overflow-x:auto;}
+.stTabs [data-baseweb="tab"] {height:42px;border-radius:10px;padding:0 16px;white-space:nowrap;font-weight:700;color:#475569;}
+.stTabs [aria-selected="true"] {background:white;box-shadow:0 4px 0 rgba(148,163,184,.16),0 5px 12px rgba(15,23,42,.1);color:#1d4ed8;}
+[data-testid="stDataFrame"] {border:1px solid #dbeafe;border-radius:15px;overflow:hidden;box-shadow:0 7px 0 rgba(148,163,184,.11),0 12px 22px rgba(15,23,42,.06);}
+.stButton>button,.stDownloadButton>button {border-radius:10px;font-weight:700;border:1px solid #bfdbfe;box-shadow:0 4px 0 #bfdbfe;transition:transform .15s ease;}
+.stButton>button:hover,.stDownloadButton>button:hover {transform:translateY(-2px);box-shadow:0 6px 0 #93c5fd;}
+@media (max-width:760px) {.block-container{padding:1rem .8rem 2rem}.hero{padding:24px 22px}.kpi{min-height:112px}.kpi-value{font-size:20px}.stTabs [data-baseweb="tab"]{padding:0 11px;font-size:12px}}
 </style>
 """, unsafe_allow_html=True)
 
@@ -231,7 +242,15 @@ tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs([
     "Scenario Insights", "Workbook Explorer",
 ])
 
-chart_layout = dict(margin=dict(l=10,r=10,t=45,b=10), height=370, legend_title_text="")
+chart_layout = dict(
+    margin=dict(l=10, r=10, t=45, b=10),
+    height=370,
+    legend_title_text="",
+    font=dict(family="Manrope, sans-serif", color="#334155"),
+    paper_bgcolor="rgba(255,255,255,0.72)",
+    plot_bgcolor="rgba(255,255,255,0.35)",
+    hoverlabel=dict(bgcolor="#0f172a", font=dict(color="white")),
+)
 
 with tab1:
     c1, c2 = st.columns([1.15, .85])
