@@ -85,6 +85,12 @@ def read_assumptions(source):
     return float(target), str(basis), rates
 
 
+def read_all_sheets(source):
+    if hasattr(source, "seek"):
+        source.seek(0)
+    return pd.read_excel(source, sheet_name=None, engine="openpyxl")
+
+
 def load_margin(source):
     if hasattr(source, "seek"): source.seek(0)
     df = pd.read_excel(source, sheet_name="Margin Analysis", engine="openpyxl")
@@ -155,11 +161,12 @@ st.sidebar.markdown("## Margin Intelligence")
 st.sidebar.caption("Academic Product Profitability • Executive Analytics")
 upload = st.sidebar.file_uploader("Use another Excel model", type=["xlsx"], help="Expected sheets: Margin Analysis and Assumptions")
 source_bytes = upload.getvalue() if upload else load_default_bytes(str(DEFAULT_FILE))
-source1, source2 = io.BytesIO(source_bytes), io.BytesIO(source_bytes)
+source1, source2, source3 = io.BytesIO(source_bytes), io.BytesIO(source_bytes), io.BytesIO(source_bytes)
 
 try:
     base_df = load_margin(source1)
     base_target, base_basis, base_rates = read_assumptions(source2)
+    workbook_sheets = read_all_sheets(source3)
 except Exception as e:
     st.error(f"Could not read the workbook: {e}")
     st.stop()
@@ -219,7 +226,10 @@ with cols[4]: kpi("Net Margin", money(net), f"{pct(net_pct)} net margin", "good"
 with cols[5]: kpi("Below Target", f"{below:,}", f"Target: {pct(target)}", "good" if below == 0 else "warn")
 
 st.write("")
-tab1, tab2, tab3, tab4, tab5 = st.tabs(["Executive Overview", "Product & Grade", "Cost Structure", "Item Explorer", "Scenario Insights"])
+tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs([
+    "Executive Overview", "Product & Grade", "Cost Structure", "Item Explorer",
+    "Scenario Insights", "Workbook Explorer",
+])
 
 chart_layout = dict(margin=dict(l=10,r=10,t=45,b=10), height=370, legend_title_text="")
 
@@ -335,5 +345,22 @@ with tab5:
         st.dataframe(risk[["Product Type","Grades","Review_Items","Net Margin %","Net_Margin"]].style.format({"Net Margin %":"{:.1%}","Net_Margin":"₹{:,.0f}"}),use_container_width=True,hide_index=True)
     else:
         st.success("All selected items are on or above the current target margin.")
+
+with tab6:
+    st.markdown(
+        '<div class="section-title">Workbook Explorer</div>'
+        '<div class="section-sub">Browse every sheet and all columns from the uploaded Excel workbook</div>',
+        unsafe_allow_html=True,
+    )
+    selected_sheet = st.selectbox("Sheet", list(workbook_sheets))
+    sheet_df = workbook_sheets[selected_sheet]
+    st.caption(f"{len(sheet_df):,} rows · {len(sheet_df.columns):,} columns")
+    st.dataframe(sheet_df, use_container_width=True, hide_index=True, height=600)
+    st.download_button(
+        "Download selected sheet (CSV)",
+        sheet_df.to_csv(index=False).encode("utf-8"),
+        f"{selected_sheet}.csv",
+        "text/csv",
+    )
 
 st.caption("Model logic: item-level landing value, gross margin and operating costs are recomputed from the workbook's raw fields and Assumptions sheet. Filters and scenario controls do not alter the source Excel file.")
