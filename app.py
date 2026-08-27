@@ -51,6 +51,27 @@ div[data-testid="stMetric"] {background:linear-gradient(145deg,#fff,#eff6ff);bor
 .stButton>button,.stDownloadButton>button {border-radius:10px;font-weight:700;border:1px solid #bfdbfe;box-shadow:0 4px 0 #bfdbfe;transition:transform .15s ease;}
 .stButton>button:hover,.stDownloadButton>button:hover {transform:translateY(-2px);box-shadow:0 6px 0 #93c5fd;}
 @media (max-width:760px) {.block-container{padding:1rem .8rem 2rem}.hero{padding:24px 22px}.kpi{min-height:112px}.kpi-value{font-size:20px}.stTabs [data-baseweb="tab"]{padding:0 11px;font-size:12px}}
+/* Netflix-inspired cinematic palette */
+:root {color:#f5f5f1;background:#141414;}
+.stApp {background:radial-gradient(circle at 50% -15%,#3b1015 0,#181818 34%,#0f0f0f 100%);color:#f5f5f1;}
+[data-testid="stSidebar"] {background:linear-gradient(180deg,#0b0b0b 0%,#171717 55%,#260b0e 100%);box-shadow:12px 0 35px rgba(0,0,0,.35);border-right:1px solid #292929;}
+.hero {background:linear-gradient(112deg,#090909 0%,#1d1d1d 48%,#7f1018 100%);border:1px solid #4a171b;border-radius:5px;box-shadow:0 25px 60px rgba(0,0,0,.45);}
+.hero:before {border-color:rgba(229,9,20,.35);box-shadow:0 0 0 35px rgba(229,9,20,.08),0 0 0 70px rgba(229,9,20,.04);}
+.hero:after {background:rgba(229,9,20,.28);}
+.hero p {color:#d2d2d2;}
+.eyebrow {color:#e50914;}
+.kpi {background:linear-gradient(145deg,#252525,#171717);border-color:#383838;box-shadow:0 12px 24px rgba(0,0,0,.28);}
+.kpi:hover {box-shadow:0 16px 30px rgba(0,0,0,.42),0 0 0 1px #e50914;}
+.kpi-label {color:#b3b3b3;}.kpi-label.landing{color:#f0444c}.kpi-label.cost{color:#f5a623}.kpi-value{color:#fff}.kpi-foot{color:#a3a3a3;}
+.good{color:#46d369}.warn{color:#f5a623}.bad{color:#e50914}
+.section-title {color:#fff}.section-sub {color:#a3a3a3}
+.info-card,div[data-testid="stMetric"] {background:linear-gradient(145deg,#252525,#171717);border-color:#383838;box-shadow:0 12px 24px rgba(0,0,0,.28);color:#f5f5f1;}
+.stTabs [data-baseweb="tab-list"] {background:#222;box-shadow:inset 0 2px 5px rgba(0,0,0,.4);}
+.stTabs [data-baseweb="tab"] {color:#b3b3b3}.stTabs [aria-selected="true"] {background:#e50914;color:#fff;box-shadow:0 5px 14px rgba(229,9,20,.3);}
+[data-testid="stDataFrame"] {border-color:#383838;box-shadow:0 12px 24px rgba(0,0,0,.24);}
+.stButton>button,.stDownloadButton>button {border-color:#e50914;background:#e50914;color:#fff;box-shadow:0 4px 0 #8b050d;}
+.stButton>button:hover,.stDownloadButton>button:hover {background:#f6121d;color:#fff;box-shadow:0 6px 0 #8b050d;}
+.stPlotlyChart {background:#1b1b1b;border-radius:5px;padding:4px;}
 </style>
 """, unsafe_allow_html=True)
 
